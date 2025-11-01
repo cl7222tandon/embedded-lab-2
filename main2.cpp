@@ -1,6 +1,12 @@
 #include <Arduino.h>
 
 // put function declarations here:
+//We want to play around with timer0
+//OC0A = PB7, Pin11
+//0C0B = PD0, Pin3
+//FAST PWM Freq = 1KHz
+//Monitoring PWM on B, A is TOP
+//I calculate CP = 64, Clock is now 125KHz, Need 125 ticks
 
 
 void setup() {
@@ -33,11 +39,7 @@ ADCSRB = 0b00100000;
 DIDR2 |= (1<<1);
 
 
-
 }
-
-
-
 
 
 void loop() {
@@ -49,7 +51,6 @@ aval =abs(3 * sin(2 * 3.141592654 * x / 1000));
 delay(20);
 
 OCR0B = aval*(OCR0A/3);
-
 
 unsigned short *ADCData;
 unsigned short ADCVal;
