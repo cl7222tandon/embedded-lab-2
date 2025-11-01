@@ -33,9 +33,29 @@ OCR0A = 124;
   
   TCCR0B = 0b00001011;
 
-ADMUX = 0b01000001; //100001
-ADCSRA = 0b11100111; // 128 prescaler
-ADCSRB = 0b00100000;
+
+  //01 = AVcc refrence, REFS0 = 1
+        //0 = Right adjust
+             //xxxxx channel selection
+   ADMUX = 0b01000001; 
+
+   //1 = ADC enabled
+      //1 = start conversion
+            //1 = no auto trigger
+                //00 = no interrupt
+                    //111 = division factor (ADC clock prescaler) = 128
+   ADCSRA = 0b11100111; // 
+   
+
+   //0 = no high speed
+      //x ACME
+            //0 = no MUX5 
+                //x
+                    //0000 = free running
+   
+   ADCSRB = 0b00100000;
+
+
 DIDR2 |= (1<<1);
 
 
