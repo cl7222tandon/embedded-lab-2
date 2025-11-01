@@ -1,18 +1,30 @@
 #include <Arduino.h>
 
 // put function declarations here:
-int myFunction(int, int);
+
 
 void setup() {
 // put your setup code here, to run once:
 Serial.begin(9600);
 
-DDRD |= (1<<0); 
+DDRD |= (1<<0); // PD0 output
 
 OCR0A=255;
 OCR0B = 0;
 OCR0A = 124;
+
+   //00 = Channel A pin disconnected
+        //10 = Channel B pin connected, clear on compare match, set at Top
+             //xx
+                 //11 = WGM 111, [1:0] = 11, Fast PWM, OCR0A TOP
+
   TCCR0A = 0b00100011;
+
+  //00
+        //xx
+            //1 = WGM 011, [2] = 1, Fast PWM, OCR0A TOP
+                 //011 = Prescaler = clk/64
+  
   TCCR0B = 0b00001011;
 
 ADMUX = 0b01000001; //100001
