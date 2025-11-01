@@ -40,23 +40,25 @@ OCR0A = 124;
    ADMUX = 0b01000001; 
 
    //1 = ADC enabled
-      //1 = start conversion
-            //1 = no auto trigger
+      //0 = not yet started
+            //1 =  auto trigger
                 //00 = no interrupt
                     //111 = division factor (ADC clock prescaler) = 128
-   ADCSRA = 0b11100111; // 
+   ADCSRA = 0b10100111; // 
    
 
    //0 = no high speed
       //x ACME
-            //0 = no MUX5 
+            //1 = MUX5, ADC9 
                 //x
                     //0000 = free running
    
    ADCSRB = 0b00100000;
 
 
-DIDR2 |= (1<<1);
+DIDR2 |= (1<<1); // Disable digital Input
+
+ADCSRA |= (1 << ADSC);
 
 
 }
